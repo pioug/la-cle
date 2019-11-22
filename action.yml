@@ -1,0 +1,8 @@
+name: "Add SSH Key"
+description: "Add SSH key to the ssh-agent"
+inputs:
+  GH_SSH_KEY:
+    description: "SSH key"
+runs:
+  using: "node12"
+  main: "index.js"

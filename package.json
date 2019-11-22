@@ -1,0 +1,24 @@
+{
+  "name": "add-ssh-key",
+  "version": "0.0.0",
+  "devDependencies": {
+    "eslint": "6.6.0",
+    "prettier": "1.19.1"
+  },
+  "dependencies": {
+    "@actions/core": "1.2.0",
+    "@actions/github": "1.1.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 10
+    },
+    "env": {
+      "es2020": true,
+      "node": true
+    }
+  }
+}

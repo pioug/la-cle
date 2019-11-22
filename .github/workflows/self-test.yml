@@ -1,0 +1,16 @@
+name: "self-test"
+
+on: push
+
+jobs:
+  test-success:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: ./
+        with:
+          GH_SSH_KEY: ${{ secrets.GH_SSH_KEY }}
+      - run: |
+          OUTPUT=`ssh -T git@github.com 2>&1`
+          if [[ "$OUTPUT" == *successfully* ]]; then exit 0; else exit 1; fi
+        shell: bash {0}
