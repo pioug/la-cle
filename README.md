@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: pioug/add-ssh-key@v1.0.0
+      - uses: pioug/la-cle@v1.0.0
         with:
           GH_SSH_KEY: ${{ secrets.GH_SSH_KEY }}
       - run: npm ci
