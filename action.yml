@@ -1,8 +1,8 @@
-name: "Add SSH Key"
-description: "Add SSH key to the ssh-agent"
+name: "La clé"
+description: "Setup GitHub credentials with SSH to (npm) install private dependencies 🤫"
 inputs:
   GH_SSH_KEY:
-    description: "SSH key"
+    description: "Private SSH key"
 runs:
   using: "node12"
   main: "index.js"
