@@ -1,5 +1,5 @@
 name: "La clé"
-description: "Setup GitHub credentials with SSH to (npm) install private dependencies 🤫"
+description: "Setup GitHub credentials with SSH to (npm) install private dependencies 🤫 Support macOS, Ubuntu and Windows environments."
 inputs:
   GH_SSH_KEY:
     description: "Private SSH key"

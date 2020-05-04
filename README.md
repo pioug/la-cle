@@ -1,4 +1,4 @@
-> Setup GitHub credentials to install private dependencies
+> Setup GitHub credentials with SSH to (npm) install private dependencies 🤫 Support macOS, Ubuntu and Windows environments.
 
 ### Input parameters
 
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: pioug/la-cle@v1.0.0
+      - uses: pioug/la-cle@v1.1.0
         with:
           GH_SSH_KEY: ${{ secrets.GH_SSH_KEY }}
       - run: npm ci
