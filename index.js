@@ -23,9 +23,8 @@ async function run() {
       fs.appendFileSync(config, `\n${IdentityFile}`);
     }
 
-    if (process.platform === "darwin") {
-      await exec("ssh-keyscan -H github.com > ~/.ssh/known_hosts");
-    }
+    await exec(`ssh-keyscan -H github.com > ${path.join(sshDirectory, 'known_hosts')}`);
+
     const cmd =
       {
         darwin: `eval $(ssh-agent -s) && ssh-add -K ${id_rsa}`,
