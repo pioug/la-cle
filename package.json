@@ -1,6 +1,6 @@
 {
   "name": "add-ssh-key",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "devDependencies": {
     "eslint": "8.25.0",
     "prettier": "2.7.1"
