@@ -2,12 +2,12 @@
   "name": "add-ssh-key",
   "version": "1.2.0",
   "devDependencies": {
-    "eslint": "8.16.0",
-    "prettier": "2.6.2"
+    "eslint": "8.25.0",
+    "prettier": "2.7.1"
   },
   "dependencies": {
-    "@actions/core": "1.8.2",
-    "@actions/github": "5.0.3"
+    "@actions/core": "1.10.0",
+    "@actions/github": "5.1.1"
   },
   "eslintConfig": {
     "extends": [
