@@ -1,19 +1,50 @@
-name: "self-test"
+name: Self-test
 
-on: push
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: read
 
 jobs:
-  test-success:
+  authenticate:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        include:
+          - os: macos-latest
+            agent: start
+          - os: macos-latest
+            agent: reuse
+          - os: ubuntu-latest
+            agent: start
+          - os: ubuntu-latest
+            agent: reuse
+          - os: windows-latest
+            agent: windows
     steps:
       - uses: actions/checkout@v6
+      - name: Start an existing SSH agent
+        if: matrix.agent == 'reuse'
+        shell: bash
+        run: |
+          eval "$(ssh-agent -s)"
+          {
+            echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
+            echo "SSH_AGENT_PID=$SSH_AGENT_PID"
+            echo "EXPECTED_SSH_AUTH_SOCK=$SSH_AUTH_SOCK"
+          } >> "$GITHUB_ENV"
       - uses: ./
         with:
           GH_SSH_KEY: ${{ secrets.GH_SSH_KEY }}
-      - run: |
-          OUTPUT=`ssh -T git@github.com 2>&1`
-          if [[ "$OUTPUT" == *successfully* ]]; then exit 0; else exit 1; fi
-        shell: bash {0}
+      - name: Verify existing SSH agent was reused
+        if: matrix.agent == 'reuse'
+        shell: bash
+        run: test "$SSH_AUTH_SOCK" = "$EXPECTED_SSH_AUTH_SOCK"
+      - shell: bash {0}
+        run: |
+          output=$(ssh -T git@github.com 2>&1) || true
+          if [[ "$output" != *"successfully authenticated"* ]]; then
+            echo "$output"
+            exit 1
+          fi
